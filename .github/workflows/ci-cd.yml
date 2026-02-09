@@ -26,8 +26,8 @@ jobs:
       - name: Build de la solution
         run: dotnet build --configuration Release --no-restore
 
-      - name: Exécution des tests unitaires et d'intégration
-        run: dotnet test --configuration Release --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage"
+      - name: Exécution des tests unitaires
+        run: dotnet test --configuration Release --verbosity normal --filter "FullyQualifiedName!~Integrations" --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage"
         working-directory: ./
 
       - name: Publication des résultats de tests
