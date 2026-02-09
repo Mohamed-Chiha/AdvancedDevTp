@@ -1,0 +1,11 @@
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\bin\Debug\net10.0\AdvancedDevTP.Domain.deps.json
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\bin\Debug\net10.0\AdvancedDevTP.Domain.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\bin\Debug\net10.0\AdvancedDevTP.Domain.pdb
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\AdvancedDevTP.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\AdvancedDevTP.Domain.AssemblyInfoInputs.cache
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\AdvancedDevTP.Domain.AssemblyInfo.cs
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\AdvancedDevTP.Domain.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\AdvancedDevTP.Domain.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\refint\AdvancedDevTP.Domain.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\AdvancedDevTP.Domain.pdb
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\ref\AdvancedDevTP.Domain.dll

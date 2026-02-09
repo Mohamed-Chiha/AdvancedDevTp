@@ -1,0 +1,6 @@
+@AdvancedDevTP.Api_HostAddress = http://localhost:5101
+
+GET {{AdvancedDevTP.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

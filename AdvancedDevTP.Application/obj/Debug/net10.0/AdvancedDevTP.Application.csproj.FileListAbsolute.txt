@@ -1,0 +1,15 @@
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\bin\Debug\net10.0\AdvancedDevTP.Application.deps.json
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\bin\Debug\net10.0\AdvancedDevTP.Application.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\bin\Debug\net10.0\AdvancedDevTP.Application.pdb
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\bin\Debug\net10.0\AdvancedDevTP.Domain.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\bin\Debug\net10.0\AdvancedDevTP.Domain.pdb
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\AdvancedDevTP.Application.csproj.AssemblyReference.cache
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\AdvancedDevTP.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\AdvancedDevTP.Application.AssemblyInfoInputs.cache
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\AdvancedDevTP.Application.AssemblyInfo.cs
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\AdvancedDevTP.Application.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\Advanced.25D8912A.Up2Date
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\AdvancedDevTP.Application.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\refint\AdvancedDevTP.Application.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\AdvancedDevTP.Application.pdb
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\ref\AdvancedDevTP.Application.dll
