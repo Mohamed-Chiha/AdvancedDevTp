@@ -86,7 +86,7 @@ public class ProductServiceTests
         {
             Name = "Keyboard",
             Description = "Mechanical keyboard",
-            Price = (int)79.99m,
+            Price = 79.99m,
             Stock = 50
         };
 
@@ -114,7 +114,7 @@ public class ProductServiceTests
         {
             Name = "Laptop Pro",
             Description = "Updated desc",
-            Price = (int)1099m,
+            Price = 1099m,
             Stock = 5
         };
 

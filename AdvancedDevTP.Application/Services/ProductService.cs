@@ -21,7 +21,7 @@ public class ProductService : IProductService
     public async Task<ProductDTO> GetByIdAsync(Guid id)
     {
         var product = await _productRepository.GetByIdAsync(id);
-        if (product is null) throw new ApplicationException("Produit n'xiste pas");
+        if (product is null) throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.");
         return MapToProductResponseDTO(product);
     }
 
@@ -41,7 +41,7 @@ public class ProductService : IProductService
     public async Task<ProductDTO> UpdateAsync(Guid id, UpdateProductRequest request)
     {
         var product = await _productRepository.GetByIdAsync(id);
-        if (product is null) throw new ApplicationException("Produit n'xiste pas");
+        if (product is null) throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.");
         product.Update(request.Name, request.Description, request.Stock, request.Price,isActive: false);
         await _productRepository.UpdateAsync(product);
         return MapToProductResponseDTO(product);
