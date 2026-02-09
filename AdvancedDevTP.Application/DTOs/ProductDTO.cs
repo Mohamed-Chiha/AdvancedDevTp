@@ -1,6 +1,6 @@
-﻿namespace AdvancedDevTP.Infrastructure.Entities;
+﻿namespace AdvancedDevTP.Application.DTOs;
 
-public class ProductEntity
+public class ProductDTO
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;

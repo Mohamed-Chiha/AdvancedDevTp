@@ -1,37 +1,78 @@
 ﻿using AdvancedDevTP.Application.DTOs;
-using AdvancedDevTP.Application.Exceptions;
 using AdvancedDevTP.Application.Interfaces;
-using AdvancedDevTP.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdvancedDevTP.Api.Controllers;
 
 [ApiController]
-[Route("api/products")]
-public class ProductsController : ControllerBase
+[Route("api/[controller]")]
+[Produces("application/json")]
+public class ProductController : ControllerBase
 {
-    private readonly ProductService _productService;
+    private readonly IProductService _productService;
 
-    public ProductsController(ProductService productService)
+    public ProductController(IProductService productService)
     {
         _productService = productService;
     }
 
-    [HttpPut("{id}/price")]
-    public IActionResult ChangePrice(Guid id, [FromBody] ChangePriceRequest request)
+
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAll()
     {
-        try
-        {
-            _productService.ChangeProductPrice(id, request.Price);
-            return NoContent(); //204
-        }
-        catch (ApplicationServiceException ex)
-        {
-            return NotFound(ex.Message); //404
-        }
-        catch (DomainException ex)
-        {
-            return BadRequest(ex.Message); //400
-        }
+        var products = await _productService.GetAllAsync();
+        return Ok(products);
+    }
+
+    [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<ProductDTO>> GetById(Guid id)
+    {
+        var product = await _productService.GetByIdAsync(id);
+        return Ok(product);
+    }
+
+
+    [HttpPost]
+    [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ProductDTO>> Create([FromBody] CreateProductRequest request)
+    {
+        var product = await _productService.CreateAsync(request);
+        return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
+    }
+
+
+    [HttpPut("{id:guid}")]
+    [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ProductDTO>> Update(Guid id, [FromBody] UpdateProductRequest request)
+    {
+        var product = await _productService.UpdateAsync(id, request);
+        return Ok(product);
+    }
+
+
+    [HttpDelete("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await _productService.DeleteAsync(id);
+        return NoContent();
+    }
+
+
+    [HttpPatch("{id:guid}/price")]
+    [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<ProductDTO>> ChangePrice(Guid id, [FromBody] ChangePriceRequest request)
+    {
+        var product = await _productService.ChangePriceAsync(id, request);
+        return Ok(product);
     }
 }

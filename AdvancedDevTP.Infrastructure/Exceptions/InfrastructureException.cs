@@ -9,8 +9,6 @@ public class InfrastructureException : Exception
         : base(message)
     {
     }
-    public InfrastructureException(string message, Exception inner)
-        : base(message, inner)
-    {
-    }
+    public InfrastructureException(string message, Exception innerException) : base(message, innerException) { }
+
 }

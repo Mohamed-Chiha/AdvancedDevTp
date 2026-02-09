@@ -1,48 +1,65 @@
+
 using AdvancedDevSample.API.Middlewares;
 using AdvancedDevTP.Application.Interfaces;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using AdvancedDevTP.Domain.Repositories;
+using AdvancedDevTP.Infrastructure.Data;
+using AdvancedDevTP.Infrastructure.Repositories;
+using Microsoft.OpenApi;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseInMemoryDatabase("ProductCatalogDb"));
 
+// --- Injection de dépendances ---
+builder.Services.AddScoped<IProductRepositoryAsync, EFProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+// --- Controllers ---
 builder.Services.AddControllers();
 
-//Add Swagger
+// --- Swagger / OpenAPI ---
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    var basepath = AppContext.BaseDirectory;
-    var xmlfiles = Directory.GetFiles(basepath, "*.xml");
-    foreach (var xmlfile in xmlfiles)
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
-        options.IncludeXmlComments(xmlfile);
+        Title = "AdvancedDevTP - Catalogue Produit API",
+        Version = "v1",
+        Description = "API REST pour la gestion d'un catalogue de produits. Architecture en couches (Domain, Application, Infrastructure, API).",
+        Contact = new OpenApiContact
+        {
+            Name = "Mohamed Chiha"
+        }
+    });
+
+    // Inclure les commentaires XML pour la documentation Swagger
+    var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly);
+    foreach (var xmlFile in xmlFiles)
+    {
+        options.IncludeXmlComments(xmlFile);
     }
 });
 
-// Application dépendencies
-builder.Services.AddScoped<ProductService>();
-
-
-//Infrastructure dépendencies
-//builder.Services.AddScoped<IProductRepository, EfProductRepository>();
-
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// --- Middleware de gestion globale des exceptions ---
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+// --- Swagger (disponible en dev et en prod pour la démo) ---
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    //Use Swagger
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalogue Produit API v1");
+    options.RoutePrefix = string.Empty; // Swagger accessible à la racine
+});
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
-app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.MapControllers();
 
 app.Run();
+
+// Nécessaire pour les tests d'intégration avec WebApplicationFactory
+public partial class Program { }

@@ -13,11 +13,14 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
         builder.ConfigureServices(services =>
         {
-            // Supprimer le vrai repository enregistré dans Program.cs
-            services.RemoveAll(typeof(IProductRepositoryAsync));
+            var descriptor = services.SingleOrDefault(
+                d => d.ServiceType == typeof(IProductRepositoryAsync));
+            if (descriptor != null)
+                services.Remove(descriptor);
 
-            // Ajouter la version In-Memory pour les tests
             services.AddSingleton<IProductRepositoryAsync, InMemoryProductRepositoryAsync>();
         });
+
+        builder.UseEnvironment("Testing");
     }
 }
