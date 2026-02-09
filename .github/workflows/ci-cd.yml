@@ -27,5 +27,8 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
+      - name: Publish test project
+        run: dotnet publish AdvancedDevTP.Tests/AdvancedDevTP.Tests.csproj -c Release -o ./publish
+
       - name: Tests
         run: dotnet test --configuration Release --no-build --verbosity normal
