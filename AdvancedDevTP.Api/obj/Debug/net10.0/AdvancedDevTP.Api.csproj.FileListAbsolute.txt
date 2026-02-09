@@ -125,3 +125,7 @@ C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.pdb
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.genruntimeconfig.cache
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\ref\AdvancedDevTP.Api.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.sourcelink.json

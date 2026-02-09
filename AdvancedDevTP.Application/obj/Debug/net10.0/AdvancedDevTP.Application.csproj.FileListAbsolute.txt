@@ -13,3 +13,4 @@ C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\refint\AdvancedDevTP.Application.dll
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\AdvancedDevTP.Application.pdb
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\ref\AdvancedDevTP.Application.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Application\obj\Debug\net10.0\AdvancedDevTP.Application.sourcelink.json

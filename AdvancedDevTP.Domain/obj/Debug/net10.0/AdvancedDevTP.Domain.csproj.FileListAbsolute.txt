@@ -9,3 +9,4 @@ C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\refint\AdvancedDevTP.Domain.dll
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\AdvancedDevTP.Domain.pdb
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\ref\AdvancedDevTP.Domain.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Domain\obj\Debug\net10.0\AdvancedDevTP.Domain.sourcelink.json

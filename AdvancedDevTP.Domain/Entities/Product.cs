@@ -16,12 +16,21 @@ public class Product
 
     public Product(string name, string description, int stock, decimal price, bool isActive)
     {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new DomainException("Le nom est obligatoire.");
+        if (name.Length > 200)
+            throw new DomainException("Le nom ne peut pas dépasser 200 caractères.");
+        if (price < 0)
+            throw new DomainException("Le prix ne peut pas être négatif.");
+        if (stock < 0)
+            throw new DomainException("Le stock ne peut pas être négatif.");
+
         Id = Guid.NewGuid();
         Name = name;
         Description = description;
         Stock = stock;
-        Price = price;          
-        IsActive = isActive;    
+        Price = price;
+        IsActive = isActive;
     }
     
     public Product(Guid productId, decimal productPrice, bool productIsActive)
@@ -34,6 +43,15 @@ public class Product
 
     public void Update(string newName, string newDescription, int newStock, decimal newPrice, bool isActive)
     {
+        if (string.IsNullOrWhiteSpace(newName))
+            throw new DomainException("Le nom est obligatoire.");
+        if (newName.Length > 200)
+            throw new DomainException("Le nom ne peut pas dépasser 200 caractères.");
+        if (newPrice < 0)
+            throw new DomainException("Le prix ne peut pas être négatif.");
+        if (newStock < 0)
+            throw new DomainException("Le stock ne peut pas être négatif.");
+
         Name = newName;
         Description = newDescription;
         Stock = newStock;
@@ -54,11 +72,19 @@ public class Product
 
     public void DeacreaseStock(int quantity)
     {
+        if (quantity <= 0)
+            throw new DomainException("La quantité doit être positive.");
+        if (quantity > Stock)
+            throw new DomainException("Stock insuffisant.");
+
         Stock -= quantity;
     }
 
     public void IncreaseStock(int quantity)
     {
+        if (quantity <= 0)
+            throw new DomainException("La quantité doit être positive.");
+
         Stock += quantity;
     }
 
