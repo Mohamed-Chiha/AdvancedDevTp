@@ -10,6 +10,7 @@ public class Product
     public int Stock { get; private set; } = 0;
     public decimal Price { get; private set; }
     public bool IsActive { get; private set; } //false par defaut
+    public Guid? CategoryId { get; private set; }
     
     private Product() { }
 
@@ -95,4 +96,8 @@ public class Product
         Price -= discountAmount;
     }
 
+    public void AssignCategory(Guid categoryId)
+    {
+        CategoryId = categoryId;
+    }
 }

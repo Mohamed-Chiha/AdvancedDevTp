@@ -67,6 +67,11 @@ public class ProductService : IProductService
         return MapToProductResponseDTO(product);
     }
     
+    /// <summary>
+    /// Map un Product vers un ProductDTO. En cas de mapping plus complexe, on pourrait utiliser AutoMapper ou un outil similaire.               
+    /// </summary>
+    /// <param name="product"></param>
+    /// <returns></returns>
     private static ProductDTO MapToProductResponseDTO(Product product)
     {
         return new ProductDTO

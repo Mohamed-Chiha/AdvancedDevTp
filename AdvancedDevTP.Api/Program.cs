@@ -16,6 +16,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IProductRepositoryAsync, EFProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+builder.Services.AddScoped<ICategoryRepositoryAsync, EFCategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddScoped<IOrderRepositoryAsync, EFOrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
 // --- Controllers ---
 builder.Services.AddControllers();
 
