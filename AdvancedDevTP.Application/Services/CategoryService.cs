@@ -1,4 +1,5 @@
-﻿using AdvancedDevTP.Application.DTOs;
+﻿using System.Net;
+using AdvancedDevTP.Application.DTOs;
 using AdvancedDevTP.Application.Exceptions;
 using AdvancedDevTP.Domain.Entities;
 using AdvancedDevTP.Domain.Repositories;
@@ -18,7 +19,7 @@ public class CategoryService : ICategoryService
     {
         var category = await _repository.GetByIdAsync(id);
         if (category is null)
-            throw new ApplicationServiceException($"Catégorie avec l'id '{id}' introuvable.");
+            throw new ApplicationServiceException($"Catégorie avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
         return MapToDTO(category);
     }
 
@@ -39,7 +40,7 @@ public class CategoryService : ICategoryService
     {
         var category = await _repository.GetByIdAsync(id);
         if (category is null)
-            throw new ApplicationServiceException($"Catégorie avec l'id '{id}' introuvable.");
+            throw new ApplicationServiceException($"Catégorie avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
 
         category.Update(request.Name, request.Description);
         await _repository.UpdateAsync(category);
@@ -49,7 +50,7 @@ public class CategoryService : ICategoryService
     public async Task DeleteAsync(Guid id)
     {
         if (!await _repository.ExistsAsync(id))
-            throw new ApplicationServiceException($"Catégorie avec l'id '{id}' introuvable.");
+            throw new ApplicationServiceException($"Catégorie avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
         await _repository.DeleteAsync(id);
     }
 

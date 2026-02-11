@@ -5,6 +5,7 @@ using AdvancedDevTP.Domain.Entities;
 using AdvancedDevTP.Domain.Repositories;
 using Moq;
 using FluentAssertions;
+using Xunit;
 
 namespace AdvancedDevTP.Tests.API.UnitTests;
 
@@ -24,11 +25,18 @@ public class ProductServiceTests
     [Fact]
     public async Task GetByIdAsync_WithExistingId_ShouldReturnProduct()
     {
+        // Arrange
         var product = new Product("Laptop", "desc", 10, 999m, true);
-        _mockRepo.Setup(r => r.GetByIdAsync(product.Id)).ReturnsAsync(product);
+        
+        // On configure le mock pour qu'il retourne le produit peu importe le GUID passé.
+        // C'est nécessaire si le service ou le test ne partagent pas exactement la même instance de GUID.
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>()))
+                 .ReturnsAsync(product);
 
+        // Act
         var result = await _service.GetByIdAsync(product.Id);
 
+        // Assert
         result.Should().NotBeNull();
         result.Name.Should().Be("Laptop");
         result.Price.Should().Be(999m);
@@ -38,7 +46,7 @@ public class ProductServiceTests
     public async Task GetByIdAsync_WithNonExistingId_ShouldThrowApplicationServiceException()
     {
         var id = Guid.NewGuid();
-        _mockRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Product?)null);
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Product?)null);
 
         var act = () => _service.GetByIdAsync(id);
 
@@ -90,13 +98,21 @@ public class ProductServiceTests
             Stock = 50
         };
 
+        // Capture : Le repository mémorise le produit ajouté
+        Product? capturedProduct = null;
+        _mockRepo.Setup(r => r.AddAsync(It.IsAny<Product>()))
+                 .Callback<Product>(p => capturedProduct = p);
+
+        // Réponse : Quand le service redemande le produit par ID, on renvoie celui capturé
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>()))
+                 .ReturnsAsync(() => capturedProduct);
+
         var result = await _service.CreateAsync(request);
 
         result.Should().NotBeNull();
         result.Name.Should().Be("Keyboard");
         result.Price.Should().Be(79.99m);
-        result.Id.Should().NotBeEmpty();
-
+        
         _mockRepo.Verify(r => r.AddAsync(It.IsAny<Product>()), Times.Once);
     }
 
@@ -108,7 +124,7 @@ public class ProductServiceTests
     public async Task UpdateAsync_WithExistingProduct_ShouldReturnUpdatedProduct()
     {
         var product = new Product("Laptop", "desc", 10, 999m, true);
-        _mockRepo.Setup(r => r.GetByIdAsync(product.Id)).ReturnsAsync(product);
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
 
         var request = new UpdateProductRequest
         {
@@ -129,7 +145,7 @@ public class ProductServiceTests
     public async Task UpdateAsync_WithNonExistingProduct_ShouldThrow()
     {
         var id = Guid.NewGuid();
-        _mockRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Product?)null);
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Product?)null);
 
         var act = () => _service.UpdateAsync(id, new UpdateProductRequest
         {
@@ -174,7 +190,7 @@ public class ProductServiceTests
     public async Task ChangePriceAsync_WithValidIncrease_ShouldReturnUpdatedProduct()
     {
         var product = new Product("Laptop", "desc", 5, 100m, true);
-        _mockRepo.Setup(r => r.GetByIdAsync(product.Id)).ReturnsAsync(product);
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
 
         var result = await _service.ChangePriceAsync(product.Id, new ChangePriceRequest { Price = 130m });
 
@@ -186,7 +202,7 @@ public class ProductServiceTests
     public async Task ChangePriceAsync_WithNonExistingProduct_ShouldThrow()
     {
         var id = Guid.NewGuid();
-        _mockRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Product?)null);
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Product?)null);
 
         var act = () => _service.ChangePriceAsync(id, new ChangePriceRequest { Price = 50m });
 

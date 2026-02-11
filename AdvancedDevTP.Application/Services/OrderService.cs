@@ -1,4 +1,5 @@
-﻿using AdvancedDevTP.Application.DTOs;
+﻿using System.Net;
+using AdvancedDevTP.Application.DTOs;
 using AdvancedDevTP.Application.Exceptions;
 using AdvancedDevTP.Domain.Entities;
 using AdvancedDevTP.Domain.Repositories;
@@ -20,7 +21,7 @@ public class OrderService : IOrderService
     {
         var order = await _orderRepository.GetByIdAsync(id);
         if (order is null)
-            throw new ApplicationServiceException($"Commande avec l'id '{id}' introuvable.");
+            throw new ApplicationServiceException($"Commande avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
         return MapToDTO(order);
     }
 
@@ -38,7 +39,7 @@ public class OrderService : IOrderService
         {
             var product = await _productRepository.GetByIdAsync(item.ProductId);
             if (product is null)
-                throw new ApplicationServiceException($"Produit '{item.ProductId}' introuvable.");
+                throw new ApplicationServiceException($"Produit '{item.ProductId}' introuvable.", HttpStatusCode.NotFound);
 
             order.AddItem(product.Id, product.Name, product.Price, item.Quantity);
             product.DeacreaseStock(item.Quantity);
@@ -52,7 +53,7 @@ public class OrderService : IOrderService
     public async Task DeleteAsync(Guid id)
     {
         if (!await _orderRepository.ExistsAsync(id))
-            throw new ApplicationServiceException($"Commande avec l'id '{id}' introuvable.");
+            throw new ApplicationServiceException($"Commande avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
         await _orderRepository.DeleteAsync(id);
     }
 

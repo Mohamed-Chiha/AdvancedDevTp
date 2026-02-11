@@ -1,11 +1,3 @@
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.csproj.AssemblyReference.cache
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\rpswa.dswa.cache.json
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.AssemblyInfoInputs.cache
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.AssemblyInfo.cs
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.csproj.CoreCompileInputs.cache
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\testhost.dll
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\xunit.abstractions.dll
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\AdvancedDevTP.Infrastructure.deps.json
@@ -23,6 +15,9 @@ C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\AdvancedDevTP.Api.xml
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.InMemory.dll
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.OpenApi.dll
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.TestPlatform.CoreUtilities.dll
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.TestPlatform.PlatformAbstractions.dll
@@ -109,6 +104,15 @@ C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\AdvancedDevTP.Application.pdb
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\AdvancedDevTP.Infrastructure.pdb
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\AdvancedDevTP.Domain.pdb
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.csproj.AssemblyReference.cache
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.AssemblyInfoInputs.cache
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.AssemblyInfo.cs
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.sourcelink.json
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -125,7 +129,3 @@ C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.pdb
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.genruntimeconfig.cache
 C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\ref\AdvancedDevTP.Api.dll
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.InMemory.dll
-C:\Users\lenovo\RiderProjects\AdvancedDevTP\AdvancedDevTP.Api\obj\Debug\net10.0\AdvancedDevTP.Api.sourcelink.json

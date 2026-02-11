@@ -1,4 +1,5 @@
-﻿using AdvancedDevTP.Application.DTOs;
+﻿using System.Net;
+using AdvancedDevTP.Application.DTOs;
 using AdvancedDevTP.Application.Exceptions;
 using AdvancedDevTP.Domain.Entities;
 using AdvancedDevTP.Domain.Repositories;
@@ -21,7 +22,7 @@ public class ProductService : IProductService
     public async Task<ProductDTO> GetByIdAsync(Guid id)
     {
         var product = await _productRepository.GetByIdAsync(id);
-        if (product is null) throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.");
+        throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
         return MapToProductResponseDTO(product);
     }
 
@@ -41,7 +42,7 @@ public class ProductService : IProductService
     public async Task<ProductDTO> UpdateAsync(Guid id, UpdateProductRequest request)
     {
         var product = await _productRepository.GetByIdAsync(id);
-        if (product is null) throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.");
+        if (product is null) throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
         product.Update(request.Name, request.Description, request.Stock, request.Price,isActive: false);
         await _productRepository.UpdateAsync(product);
         return MapToProductResponseDTO(product);
@@ -51,7 +52,7 @@ public class ProductService : IProductService
     {
         var exists = await _productRepository.ExistsAsync(id);
         if (!exists)
-            throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.");
+            throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
 
         await _productRepository.DeleteAsync(id);
     }
@@ -60,7 +61,7 @@ public class ProductService : IProductService
     {
         var product = await _productRepository.GetByIdAsync(id);
         if (product is null)
-            throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.");
+            throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
 
         product.ChangePrice(request.Price);
         await _productRepository.UpdateAsync(product);

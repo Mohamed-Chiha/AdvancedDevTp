@@ -1,4 +1,6 @@
 {
+  "AdvancedDevTP.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\lenovo\\RiderProjects\\AdvancedDevTP\\AdvancedDevTP.Api",
   "AdvancedDevTP.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\lenovo\\RiderProjects\\AdvancedDevTP\\AdvancedDevTP.Application",
-  "AdvancedDevTP.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\lenovo\\RiderProjects\\AdvancedDevTP\\AdvancedDevTP.Domain"
+  "AdvancedDevTP.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\lenovo\\RiderProjects\\AdvancedDevTP\\AdvancedDevTP.Domain",
+  "AdvancedDevTP.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\lenovo\\RiderProjects\\AdvancedDevTP\\AdvancedDevTP.Infrastructure"
 }

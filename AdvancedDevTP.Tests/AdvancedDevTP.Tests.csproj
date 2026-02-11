@@ -4,6 +4,8 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+		<PreserveCompilationContext>true</PreserveCompilationContext>
+		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -27,6 +29,7 @@
       <ProjectReference Include="..\AdvancedDevTP.Application\AdvancedDevTP.Application.csproj" />
       <ProjectReference Include="..\AdvancedDevTP.Domain\AdvancedDevTP.Domain.csproj" />
       <ProjectReference Include="..\AdvancedDevTP.Infrastructure\AdvancedDevTP.Infrastructure.csproj" />
+	  <ProjectReference Include="..\AdvancedDevTP.Api\AdvancedDevTP.Api.csproj" />
     </ItemGroup>
 
 </Project>
