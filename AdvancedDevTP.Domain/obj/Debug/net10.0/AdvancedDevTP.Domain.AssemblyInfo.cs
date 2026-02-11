@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdvancedDevTP.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+44d9c521bc8fbba9b410a382a330dddce6f1fd3d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e785afa997fd8618a2cb1fa4ab57ad5a6139cebd")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdvancedDevTP.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdvancedDevTP.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

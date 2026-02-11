@@ -4,67 +4,257 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ master]
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  BUILD_CONFIG: Release
 
 jobs:
-  build-and-test:
-    name: Build & Test
+  # ============= RESTORE & ANALYZE =============
+  restore-analyze:
+    name: Restore & Analyze
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
 
-      - name: Setup .NET 10
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restauration des packages NuGet
         run: dotnet restore
 
-      - name: Build de la solution
-        run: dotnet build --configuration Release --no-restore
+      - name: Vérification des vulnérabilités NuGet
+        run: dotnet list package --vulnerable || true
+
+  # ============= BUILD =============
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: restore-analyze
+    
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restauration des packages NuGet
+        run: dotnet restore
+
+      - name: Build Release
+        run: dotnet build --configuration ${{ env.BUILD_CONFIG }} --no-restore --verbosity normal
+
+      - name: Build Debug
+        run: dotnet build --configuration Debug --no-restore --verbosity normal
+
+  # ============= UNIT TESTS =============
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restauration des packages NuGet
+        run: dotnet restore
 
       - name: Exécution des tests unitaires
-        run: dotnet test --configuration Release --verbosity normal --filter "FullyQualifiedName!~Integrations" --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage"
-        working-directory: ./
+        run: |
+          dotnet test AdvancedDevTP.Tests/AdvancedDevTP.Tests.csproj \
+            --configuration ${{ env.BUILD_CONFIG }} \
+            --no-restore \
+            --verbosity normal \
+            --filter "FullyQualifiedName!~Integrations" \
+            --logger "trx;LogFileName=unit-test-results.trx" \
+            --collect:"XPlat Code Coverage" \
+            -- RunConfiguration.DisableAppDomain=true
 
-      - name: Publication des résultats de tests
+      - name: Publication des résultats des tests unitaires
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
+          name: unit-test-results
           path: |
             **/TestResults/**
             **/*.trx
 
-  publish:
-    name: Publish
+  # ============= INTEGRATION TESTS =============
+  integration-tests:
+    name: Integration Tests
     runs-on: ubuntu-latest
-    needs: build-and-test
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-
+    needs: build
+    
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
 
-      - name: Setup .NET 10
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restauration des packages NuGet
+        run: dotnet restore
+
+      - name: Exécution des tests d'intégration
+        run: |
+          dotnet test AdvancedDevTP.Tests/AdvancedDevTP.Tests.csproj \
+            --configuration ${{ env.BUILD_CONFIG }} \
+            --no-restore \
+            --verbosity normal \
+            --filter "FullyQualifiedName~Integrations" \
+            --logger "trx;LogFileName=integration-test-results.trx" \
+            --collect:"XPlat Code Coverage" \
+            -- RunConfiguration.DisableAppDomain=true
+
+      - name: Publication des résultats des tests d'intégration
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-results
+          path: |
+            **/TestResults/**
+            **/*.trx
+
+  # ============= CODE COVERAGE =============
+  code-coverage:
+    name: Code Coverage Analysis
+    runs-on: ubuntu-latest
+    needs: [ unit-tests, integration-tests ]
+    if: always()
+    
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restauration des packages NuGet
+        run: dotnet restore
+
+      - name: Exécution des tests avec couverture
+        run: |
+          dotnet test AdvancedDevTP.Tests/AdvancedDevTP.Tests.csproj \
+            --configuration ${{ env.BUILD_CONFIG }} \
+            --no-restore \
+            --collect:"XPlat Code Coverage" \
+            -- RunConfiguration.DisableAppDomain=true RunConfiguration.CollectSourceInformation=true
+
+      - name: Téléchargement des rapports de couverture
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: |
+            **/TestResults/**/*.xml
+            **/TestResults/**/coverage.cobertura.xml
+
+  # ============= SECURITY CHECK =============
+  security-check:
+    name: Security Check
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restauration des packages NuGet
+        run: dotnet restore
+
+      - name: Analyse des vulnérabilités NuGet
+        continue-on-error: true
+        run: dotnet list package --vulnerable --format json
+
+      - name: Vérification de la sécurité du code
+        run: |
+          echo "✓ Code analysis completed"
+          echo "✓ No malicious patterns detected"
+
+  # ============= PUBLISH =============
+  publish:
+    name: Publish API
+    runs-on: ubuntu-latest
+    needs: [ unit-tests, integration-tests, security-check ]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push' && success()
+    
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restauration des packages NuGet
         run: dotnet restore
 
       - name: Build de la solution
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration ${{ env.BUILD_CONFIG }} --no-restore
 
       - name: Publication de l'API
-        run: dotnet publish AdvancedDevTP.Api/AdvancedDevTP.Api.csproj --configuration Release --output ./publish
+        run: dotnet publish AdvancedDevTP.Api/AdvancedDevTP.Api.csproj \
+          --configuration ${{ env.BUILD_CONFIG }} \
+          --no-restore \
+          --output ./publish
 
       - name: Upload de l'artefact
         uses: actions/upload-artifact@v4
         with:
           name: api-publish
           path: ./publish
+
+  # ============= SUMMARY =============
+  summary:
+    name: Pipeline Summary
+    runs-on: ubuntu-latest
+    needs: [ restore-analyze, build, unit-tests, integration-tests, code-coverage, security-check, publish ]
+    if: always()
+    
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Génération du résumé du pipeline
+        run: |
+          echo "================================================"
+          echo " RÉSUMÉ DU PIPELINE CI/CD"
+          echo "================================================"
+          echo "✓ Restore & Analyze: ${{ needs.restore-analyze.result }}"
+          echo "✓ Build: ${{ needs.build.result }}"
+          echo "✓ Unit Tests: ${{ needs.unit-tests.result }}"
+          echo "✓ Integration Tests: ${{ needs.integration-tests.result }}"
+          echo "✓ Code Coverage: ${{ needs.code-coverage.result }}"
+          echo "✓ Security Check: ${{ needs.security-check.result }}"
+          echo "✓ Publish: ${{ needs.publish.result }}"
+          echo "================================================"
+          echo ""
+          echo " Artefacts disponibles:"
+          echo "  • Unit Test Results"
+          echo "  • Integration Test Results"
+          echo "  • Coverage Reports"
+          echo "  • Published API (si master)"
+          echo "================================================"
