@@ -22,7 +22,8 @@ public class ProductService : IProductService
     public async Task<ProductDTO> GetByIdAsync(Guid id)
     {
         var product = await _productRepository.GetByIdAsync(id);
-        throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
+        if (product is null)
+            throw new ApplicationServiceException($"Produit avec l'id '{id}' introuvable.", HttpStatusCode.NotFound);
         return MapToProductResponseDTO(product);
     }
 
