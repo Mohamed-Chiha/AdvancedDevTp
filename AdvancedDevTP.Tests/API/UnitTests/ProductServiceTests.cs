@@ -26,7 +26,7 @@ public class ProductServiceTests
     public async Task GetByIdAsync_WithExistingId_ShouldReturnProduct()
     {
         // Arrange
-        var product = new Product("Laptop", "Description", 10, 999m, true);
+        var product = new Product("Laptop", "Description", 10, (decimal)1299.99, true);
         
         // SETUP: We tell the Mock to return 'product' for ANY Guid provided.
         // This is crucial because 'product.Id' is generated randomly inside the constructor.
@@ -39,7 +39,7 @@ public class ProductServiceTests
         // Assert
         result.Should().NotBeNull();
         result.Name.Should().Be("Laptop");
-        result.Price.Should().Be(999m);
+        result.Price.Should().Be((decimal)1299.99);
         
         // Verification (Optional but good)
         _mockRepo.Verify(r => r.GetByIdAsync(product.Id), Times.Once);
@@ -67,8 +67,8 @@ public class ProductServiceTests
     {
         var products = new List<Product>
         {
-            new Product("Laptop", "desc", 10, 999m, true),
-            new Product("Mouse", "desc", 100, 29m, true)
+            new Product("Laptop", "desc", 10, (decimal)1299.99, true),
+            new Product("Mouse", "desc", 100, (decimal)29, true)
         };
         _mockRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(products);
 
@@ -94,7 +94,7 @@ public class ProductServiceTests
         {
             Name = "Keyboard",
             Description = "Mechanical keyboard",
-            Price = 79.99m,
+            Price = (decimal)79.99,
             Stock = 50
         };
 
@@ -122,19 +122,15 @@ public class ProductServiceTests
     [Fact]
     public async Task UpdateAsync_WithExistingProduct_ShouldReturnUpdatedProduct()
     {
-        var product = new Product("Laptop", "desc", 10, 999m, true);
+        var product = new Product("Laptop", "desc", 10, (decimal)899.99, true);
         
-        // Setup GetById to find the product
-        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
-        
-        // Setup Update to succeed
-        _mockRepo.Setup(r => r.UpdateAsync(It.IsAny<Product>())).Returns(Task.CompletedTask);
+        // ...existing code...
 
         var request = new UpdateProductRequest
         {
             Name = "Laptop Pro",
             Description = "Updated desc",
-            Price = 1099m,
+            Price = (decimal)1099,
             Stock = 5
         };
 
@@ -170,13 +166,13 @@ public class ProductServiceTests
     [Fact]
     public async Task ChangePriceAsync_WithValidIncrease_ShouldReturnUpdatedProduct()
     {
-        var product = new Product("Laptop", "desc", 5, 100m, true);
+        var product = new Product("Laptop", "desc", 5, (decimal)100, true);
         _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
         _mockRepo.Setup(r => r.UpdateAsync(It.IsAny<Product>())).Returns(Task.CompletedTask);
 
-        var result = await _service.ChangePriceAsync(product.Id, new ChangePriceRequest { Price = 130m });
+        var result = await _service.ChangePriceAsync(product.Id, new ChangePriceRequest { Price = (decimal)130 });
 
-        result.Price.Should().Be(130m);
+        result.Price.Should().Be((decimal)130);
         _mockRepo.Verify(r => r.UpdateAsync(It.IsAny<Product>()), Times.Once);
     }
     

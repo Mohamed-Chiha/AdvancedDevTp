@@ -38,7 +38,7 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         {
             Name = "Clavier Mécanique",
             Description = "Switch Cherry MX Blue",
-            Price = 89.99m,
+            Price = (decimal)89.99,
             Stock = 30
         };
 
@@ -50,7 +50,7 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         var created = await response.Content.ReadFromJsonAsync<ProductDTO>();
         created.Should().NotBeNull();
         created!.Name.Should().Be("Clavier Mécanique");
-        created.Price.Should().Be(89.99m);
+        created.Price.Should().Be((decimal)89.99);
         created.Id.Should().NotBeEmpty();
 
         // Verify location header
@@ -65,7 +65,7 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         {
             Name = "Souris Gamer",
             Description = "16000 DPI",
-            Price = 59.99m,
+            Price = (decimal)59.99,
             Stock = 50
         };
         var createResponse = await _client.PostAsJsonAsync("/api/Product", request);
@@ -86,7 +86,7 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         var request = new CreateProductRequest
         {
             Name = "", // Invalid: empty name
-            Price = 10m,
+            Price = (decimal)10,
             Stock = 5
         };
 
@@ -107,7 +107,7 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         {
             Name = "Écran 24p",
             Description = "Full HD",
-            Price = 199m,
+            Price = (decimal)199,
             Stock = 15
         };
         var createResponse = await _client.PostAsJsonAsync("/api/Product", createRequest);
@@ -118,7 +118,7 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         {
             Name = "Écran 27p 4K",
             Description = "Ultra HD",
-            Price = 349m,
+            Price = (decimal)349,
             Stock = 10
         };
         var updateResponse = await _client.PutAsJsonAsync($"/api/Product/{created!.Id}", updateRequest);
@@ -126,7 +126,7 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         updateResponse.StatusCode.Should().Be(HttpStatusCode.OK);
         var updated = await updateResponse.Content.ReadFromJsonAsync<ProductDTO>();
         updated!.Name.Should().Be("Écran 27p 4K");
-        updated.Price.Should().Be(349m);
+        updated.Price.Should().Be((decimal)349);
     }
 
     [Fact]
@@ -134,7 +134,7 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
     {
         var updateRequest = new UpdateProductRequest
         {
-            Name = "Ghost", Description = "N/A", Price = 1m, Stock = 0
+            Name = "Ghost", Description = "N/A", Price = (decimal)1, Stock = 0
         };
 
         var response = await _client.PutAsJsonAsync($"/api/Product/{Guid.NewGuid()}", updateRequest);
@@ -154,7 +154,7 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         {
             Name = "Produit à supprimer",
             Description = "Temp",
-            Price = 1m,
+            Price = (decimal)1,
             Stock = 1
         };
         var createResponse = await _client.PostAsJsonAsync("/api/Product", request);
@@ -190,20 +190,20 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         {
             Name = "Casque Audio",
             Description = "Bluetooth",
-            Price = 100m,
+            Price = (decimal)100,
             Stock = 20
         };
         var createResponse = await _client.PostAsJsonAsync("/api/Product", request);
         var created = await createResponse.Content.ReadFromJsonAsync<ProductDTO>();
 
         // Change price (+30%, OK)
-        var changePriceRequest = new ChangePriceRequest { Price = 130m };
+        var changePriceRequest = new ChangePriceRequest { Price = (decimal)130 };
         var patchResponse = await _client.PatchAsJsonAsync(
             $"/api/Product/{created!.Id}/price", changePriceRequest);
 
         patchResponse.StatusCode.Should().Be(HttpStatusCode.OK);
         var updated = await patchResponse.Content.ReadFromJsonAsync<ProductDTO>();
-        updated!.Price.Should().Be(130m);
+        updated!.Price.Should().Be((decimal)130);
     }
 
     [Fact]
@@ -214,14 +214,14 @@ public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebAppl
         {
             Name = "Webcam HD",
             Description = "1080p",
-            Price = 100m,
+            Price = (decimal)100,
             Stock = 10
         };
         var createResponse = await _client.PostAsJsonAsync("/api/Product", request);
         var created = await createResponse.Content.ReadFromJsonAsync<ProductDTO>();
 
         // Change price (+60%, NOT OK)
-        var changePriceRequest = new ChangePriceRequest { Price = 160m };
+        var changePriceRequest = new ChangePriceRequest { Price = (decimal)160 };
         var patchResponse = await _client.PatchAsJsonAsync(
             $"/api/Product/{created!.Id}/price", changePriceRequest);
 
