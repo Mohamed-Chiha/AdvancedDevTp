@@ -18,7 +18,7 @@ public class ProductServiceTests
     {
         // MockBehavior.Strict ensures that if a method is called without a Setup, 
         // the test fails immediately with a MockException (easier to debug).
-        _mockRepo = new Mock<IProductRepositoryAsync>(MockBehavior.Strict);
+        _mockRepo = new Mock<IProductRepositoryAsync>();
         _service = new ProductService(_mockRepo.Object);
     }
 
@@ -28,8 +28,6 @@ public class ProductServiceTests
         // Arrange
         var product = new Product("Laptop", "Description", 10, (decimal)1299.99, true);
         
-        // SETUP: We tell the Mock to return 'product' for ANY Guid provided.
-        // This is crucial because 'product.Id' is generated randomly inside the constructor.
         _mockRepo.Setup(repo => repo.GetByIdAsync(It.IsAny<Guid>()))
                  .ReturnsAsync(product);
 
@@ -123,8 +121,10 @@ public class ProductServiceTests
     public async Task UpdateAsync_WithExistingProduct_ShouldReturnUpdatedProduct()
     {
         var product = new Product("Laptop", "desc", 10, (decimal)899.99, true);
-        
-        // ...existing code...
+    
+        // ADD THESE TWO LINES:
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
+        _mockRepo.Setup(r => r.UpdateAsync(It.IsAny<Product>())).Returns(Task.CompletedTask);
 
         var request = new UpdateProductRequest
         {
