@@ -4,6 +4,9 @@ using FluentAssertions;
 
 namespace AdvancedDevTP.Tests.API.UnitTests;
 
+/// <summary>
+/// Tests unitaires pour les règles métier de l'entité Category.
+/// </summary>
 public class CategoryDomainTests
 {
     #region Construction

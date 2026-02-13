@@ -4,6 +4,9 @@ using FluentAssertions;
 
 namespace AdvancedDevTP.Tests.API.UnitTests;
 
+/// <summary>
+/// Tests unitaires pour les règles métier de l'entité Order.
+/// </summary>
 public class OrderDomainTests
 {
     #region Construction

@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AdvancedDevTP.Api.Controllers;
 
+/// <summary>
+/// Contrôleur API pour la gestion des produits du catalogue.
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
@@ -11,12 +14,17 @@ public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
 
+    /// <summary>
+    /// Initialise une nouvelle instance du contrôleur ProductController.
+    /// </summary>
     public ProductController(IProductService productService)
     {
         _productService = productService;
     }
 
-
+    /// <summary>
+    /// Récupère tous les produits du catalogue.
+    /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAll()
@@ -25,6 +33,9 @@ public class ProductController : ControllerBase
         return Ok(products);
     }
 
+    /// <summary>
+    /// Récupère un produit spécifique par son identifiant.
+    /// </summary>
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -35,6 +46,9 @@ public class ProductController : ControllerBase
     }
 
 
+    /// <summary>
+    /// Crée un nouveau produit dans le catalogue.
+    /// </summary>
     [HttpPost]
     [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -45,6 +59,9 @@ public class ProductController : ControllerBase
     }
 
 
+    /// <summary>
+    /// Met à jour un produit existant.
+    /// </summary>
     [HttpPut("{id:guid}")]
     [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -56,6 +73,9 @@ public class ProductController : ControllerBase
     }
 
 
+    /// <summary>
+    /// Supprime un produit du catalogue.
+    /// </summary>
     [HttpDelete("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -66,6 +86,9 @@ public class ProductController : ControllerBase
     }
 
 
+    /// <summary>
+    /// Change le prix d'un produit.
+    /// </summary>
     [HttpPatch("{id:guid}/price")]
     [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

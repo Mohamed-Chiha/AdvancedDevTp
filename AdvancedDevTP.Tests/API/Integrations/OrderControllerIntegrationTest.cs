@@ -5,6 +5,9 @@ using FluentAssertions;
 
 namespace AdvancedDevTP.Tests.API.Integrations;
 
+/// <summary>
+/// Tests d'intégration pour le contrôleur OrderController.
+/// </summary>
 public class OrderControllerIntegrationTest : IClassFixture<CustomWebApplicationFactory>
 {
     private readonly HttpClient _client;

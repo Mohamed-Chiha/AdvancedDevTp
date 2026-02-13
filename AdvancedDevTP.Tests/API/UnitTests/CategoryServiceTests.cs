@@ -8,6 +8,9 @@ using Moq;
 
 namespace AdvancedDevTP.Tests.API.UnitTests;
 
+/// <summary>
+/// Tests unitaires pour le service CategoryService avec mocks des dépôts.
+/// </summary>
 public class CategoryServiceTests
 {
     private readonly Mock<ICategoryRepositoryAsync> _mockRepo;

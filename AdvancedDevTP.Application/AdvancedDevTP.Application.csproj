@@ -10,9 +10,4 @@
       <ProjectReference Include="..\AdvancedDevTP.Domain\AdvancedDevTP.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Services\Category\" />
-      <Folder Include="Services\Product\" />
-    </ItemGroup>
-
 </Project>

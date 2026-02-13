@@ -7,27 +7,42 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdvancedDevTP.Infrastructure.Repositories;
 
+/// <summary>
+/// Implémentation du dépôt de produits avec Entity Framework Core.
+/// </summary>
 public class EFProductRepository : IProductRepositoryAsync
 {
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Initialise une nouvelle instance du dépôt EFProductRepository.
+    /// </summary>
     public EFProductRepository(AppDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
+    /// <summary>
+    /// Récupère un produit par son identifiant de manière asynchrone.
+    /// </summary>
     public async Task<Product?> GetByIdAsync(Guid id)
     {
         var entity = await _context.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
         return entity is null ? null : MapToDomain(entity);
     }
 
+    /// <summary>
+    /// Récupère tous les produits de manière asynchrone.
+    /// </summary>
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
         var entities = await _context.Products.AsNoTracking().ToListAsync();
         return entities.Select(MapToDomain);
     }
 
+    /// <summary>
+    /// Ajoute un nouveau produit de manière asynchrone.
+    /// </summary>
     public async Task AddAsync(Product product)
     {
         var entity = MapToEntity(product);
@@ -35,6 +50,9 @@ public class EFProductRepository : IProductRepositoryAsync
         await _context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Met à jour un produit existant de manière asynchrone.
+    /// </summary>
     public async Task UpdateAsync(Product product)
     {
         var entity = await _context.Products.FindAsync(product.Id);
@@ -49,6 +67,9 @@ public class EFProductRepository : IProductRepositoryAsync
         await _context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Supprime un produit par son identifiant de manière asynchrone.
+    /// </summary>
     public async Task DeleteAsync(Guid id)
     {
         var entity = await _context.Products.FindAsync(id);
@@ -59,11 +80,17 @@ public class EFProductRepository : IProductRepositoryAsync
         await _context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Vérifie l'existence d'un produit par son identifiant.
+    /// </summary>
     public async Task<bool> ExistsAsync(Guid id)
     {
         return await _context.Products.AnyAsync(p => p.Id == id);
     }
 
+    /// <summary>
+    /// Change le prix d'un produit par son identifiant.
+    /// </summary>
     public Task ChangePriceAsync(Guid id, decimal newPrice)
     {
         throw new NotImplementedException();
@@ -71,6 +98,9 @@ public class EFProductRepository : IProductRepositoryAsync
 
     #region Mapping
 
+    /// <summary>
+    /// Mappe une entité ProductEntity vers un objet de domaine Product.
+    /// </summary>
     private static Product MapToDomain(ProductEntity entity)
     {
         var product = (Product)System.Runtime.Serialization.FormatterServices
@@ -87,6 +117,9 @@ public class EFProductRepository : IProductRepositoryAsync
         return product;
     }
 
+    /// <summary>
+    /// Mappe un objet de domaine Product vers une entité ProductEntity.
+    /// </summary>
     private static ProductEntity MapToEntity(Product product)
     {
         return new ProductEntity

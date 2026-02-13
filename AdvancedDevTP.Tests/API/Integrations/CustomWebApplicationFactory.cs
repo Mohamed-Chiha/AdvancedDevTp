@@ -5,12 +5,19 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions; // <--- Indispensable pour RemoveAll
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AdvancedDevTP.Tests.API.Integrations;
 
+/// <summary>
+/// Factory personnalisée pour créer une application web en mémoire pour les tests d'intégration.
+/// Utilise des dépôts en mémoire au lieu des vrais dépôts Entity Framework.
+/// </summary>
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
+    /// <summary>
+    /// Configure le host de test en remplaçant les dépôts par des implémentations en mémoire.
+    /// </summary>
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureTestServices(services =>

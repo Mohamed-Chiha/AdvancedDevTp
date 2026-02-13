@@ -6,15 +6,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdvancedDevTP.Infrastructure.Repositories;
 
+/// <summary>
+/// Implémentation du dépôt de commandes avec Entity Framework Core.
+/// </summary>
 public class EFOrderRepository : IOrderRepositoryAsync
 {
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Initialise une nouvelle instance du dépôt EFOrderRepository.
+    /// </summary>
     public EFOrderRepository(AppDbContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// Récupère une commande par son identifiant avec ses articles de manière asynchrone.
+    /// </summary>
     public async Task<Order?> GetByIdAsync(Guid id)
     {
         var entity = await _context.Orders
@@ -25,6 +34,9 @@ public class EFOrderRepository : IOrderRepositoryAsync
         return entity is null ? null : MapToDomain(entity);
     }
 
+    /// <summary>
+    /// Récupère toutes les commandes avec leurs articles de manière asynchrone.
+    /// </summary>
     public async Task<IEnumerable<Order>> GetAllAsync()
     {
         var entities = await _context.Orders
@@ -35,6 +47,9 @@ public class EFOrderRepository : IOrderRepositoryAsync
         return entities.Select(MapToDomain);
     }
 
+    /// <summary>
+    /// Ajoute une nouvelle commande avec ses articles de manière asynchrone.
+    /// </summary>
     public async Task AddAsync(Order order)
     {
         var entity = MapToEntity(order);
@@ -42,6 +57,9 @@ public class EFOrderRepository : IOrderRepositoryAsync
         await _context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Supprime une commande et ses articles par son identifiant de manière asynchrone.
+    /// </summary>
     public async Task DeleteAsync(Guid id)
     {
         var entity = await _context.Orders
@@ -55,6 +73,9 @@ public class EFOrderRepository : IOrderRepositoryAsync
         await _context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Vérifie l'existence d'une commande par son identifiant.
+    /// </summary>
     public async Task<bool> ExistsAsync(Guid id)
     {
         return await _context.Orders.AnyAsync(o => o.Id == id);
@@ -62,6 +83,9 @@ public class EFOrderRepository : IOrderRepositoryAsync
 
     #region Mapping
 
+    /// <summary>
+    /// Mappe une entité OrderEntity vers un objet de domaine Order avec ses articles.
+    /// </summary>
     private static Order MapToDomain(OrderEntity entity)
     {
         var order = (Order)System.Runtime.Serialization.FormatterServices
@@ -83,6 +107,9 @@ public class EFOrderRepository : IOrderRepositoryAsync
         return order;
     }
 
+    /// <summary>
+    /// Mappe une entité OrderItemEntity vers un objet de domaine OrderItem.
+    /// </summary>
     private static OrderItem MapItemToDomain(OrderItemEntity entity)
     {
         var item = (OrderItem)System.Runtime.Serialization.FormatterServices
@@ -98,6 +125,9 @@ public class EFOrderRepository : IOrderRepositoryAsync
         return item;
     }
 
+    /// <summary>
+    /// Mappe un objet de domaine Order vers une entité OrderEntity avec ses articles.
+    /// </summary>
     private static OrderEntity MapToEntity(Order order)
     {
         return new OrderEntity

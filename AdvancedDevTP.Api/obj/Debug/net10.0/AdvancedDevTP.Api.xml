@@ -4,6 +4,126 @@
         <name>AdvancedDevTP.Api</name>
     </assembly>
     <members>
+        <member name="T:AdvancedDevTP.Api.Controllers.CategoryController">
+            <summary>
+            Contrôleur API pour la gestion des catégories de produits.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.CategoryController.#ctor(AdvancedDevTP.Application.Interfaces.ICategoryService)">
+            <summary>
+            Initialise une nouvelle instance du contrôleur CategoryController.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.CategoryController.GetAll">
+            <summary>
+            Récupère toutes les catégories.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.CategoryController.GetById(System.Guid)">
+            <summary>
+            Récupère une catégorie spécifique par son identifiant.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.CategoryController.Create(AdvancedDevTP.Application.DTOs.CreateCategoryRequest)">
+            <summary>
+            Crée une nouvelle catégorie.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.CategoryController.Update(System.Guid,AdvancedDevTP.Application.DTOs.UpdateCategoryRequest)">
+            <summary>
+            Met à jour une catégorie existante.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.CategoryController.Delete(System.Guid)">
+            <summary>
+            Supprime une catégorie.
+            </summary>
+        </member>
+        <member name="T:AdvancedDevTP.Api.Controllers.OrderController">
+            <summary>
+            Contrôleur API pour la gestion des commandes clients.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.OrderController.#ctor(AdvancedDevTP.Application.Interfaces.IOrderService)">
+            <summary>
+            Initialise une nouvelle instance du contrôleur OrderController.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.OrderController.GetAll">
+            <summary>
+            Récupère toutes les commandes.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.OrderController.GetById(System.Guid)">
+            <summary>
+            Récupère une commande spécifique par son identifiant.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.OrderController.Create(AdvancedDevTP.Application.DTOs.CreateOrderRequest)">
+            <summary>
+            Crée une nouvelle commande.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.OrderController.Delete(System.Guid)">
+            <summary>
+            Supprime une commande.
+            </summary>
+        </member>
+        <member name="T:AdvancedDevTP.Api.Controllers.ProductController">
+            <summary>
+            Contrôleur API pour la gestion des produits du catalogue.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.ProductController.#ctor(AdvancedDevTP.Application.Interfaces.IProductService)">
+            <summary>
+            Initialise une nouvelle instance du contrôleur ProductController.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.ProductController.GetAll">
+            <summary>
+            Récupère tous les produits du catalogue.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.ProductController.GetById(System.Guid)">
+            <summary>
+            Récupère un produit spécifique par son identifiant.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.ProductController.Create(AdvancedDevTP.Application.DTOs.CreateProductRequest)">
+            <summary>
+            Crée un nouveau produit dans le catalogue.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.ProductController.Update(System.Guid,AdvancedDevTP.Application.DTOs.UpdateProductRequest)">
+            <summary>
+            Met à jour un produit existant.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.ProductController.Delete(System.Guid)">
+            <summary>
+            Supprime un produit du catalogue.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevTP.Api.Controllers.ProductController.ChangePrice(System.Guid,AdvancedDevTP.Application.DTOs.ChangePriceRequest)">
+            <summary>
+            Change le prix d'un produit.
+            </summary>
+        </member>
+        <member name="T:AdvancedDevSample.API.Middlewares.ExceptionHandlingMiddleware">
+            <summary>
+            Middleware pour la gestion centralisée des exceptions en couche API.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevSample.API.Middlewares.ExceptionHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{AdvancedDevSample.API.Middlewares.ExceptionHandlingMiddleware})">
+            <summary>
+            Initialise une nouvelle instance du middleware ExceptionHandlingMiddleware.
+            </summary>
+        </member>
+        <member name="M:AdvancedDevSample.API.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Traite les exceptions levées durant le pipeline de requête.
+            </summary>
+        </member>
         <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
             <summary>
             Generates a documentation comment ID for a type.

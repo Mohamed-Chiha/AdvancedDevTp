@@ -6,9 +6,16 @@ using AdvancedDevTP.Domain.Repositories;
 
 namespace AdvancedDevTP.Application.Interfaces;
 
+/// <summary>
+/// Implémentation du service métier pour la gestion des produits du catalogue.
+/// </summary>
 public class ProductService : IProductService
 {
     private readonly IProductRepositoryAsync _productRepository;
+    
+    /// <summary>
+    /// Initialise une nouvelle instance du service ProductService.
+    /// </summary>
     public ProductService(IProductRepositoryAsync productRepository)
     {
         _productRepository = productRepository;
@@ -19,6 +26,9 @@ public class ProductService : IProductService
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// Récupère un produit par son identifiant.
+    /// </summary>
     public async Task<ProductDTO> GetByIdAsync(Guid id)
     {
         var product = await _productRepository.GetByIdAsync(id);
@@ -27,12 +37,18 @@ public class ProductService : IProductService
         return MapToProductResponseDTO(product);
     }
 
+    /// <summary>
+    /// Récupère tous les produits du catalogue.
+    /// </summary>
     public async Task<IEnumerable<ProductDTO>> GetAllAsync()
     {
         var products = await _productRepository.GetAllAsync();
         return products.Select(MapToProductResponseDTO);
     }
 
+    /// <summary>
+    /// Crée un nouveau produit dans le catalogue.
+    /// </summary>
     public async Task<ProductDTO> CreateAsync(CreateProductRequest request)
     {
         var product = new Product(request.Name, request.Description, request.Stock, request.Price, isActive: true);
@@ -40,6 +56,9 @@ public class ProductService : IProductService
         return MapToProductResponseDTO(product);
     }
 
+    /// <summary>
+    /// Met à jour un produit existant.
+    /// </summary>
     public async Task<ProductDTO> UpdateAsync(Guid id, UpdateProductRequest request)
     {
         var product = await _productRepository.GetByIdAsync(id);
@@ -49,6 +68,9 @@ public class ProductService : IProductService
         return MapToProductResponseDTO(product);
     }
 
+    /// <summary>
+    /// Supprime un produit du catalogue.
+    /// </summary>
     public async Task DeleteAsync(Guid id)
     {
         var exists = await _productRepository.ExistsAsync(id);
@@ -58,6 +80,9 @@ public class ProductService : IProductService
         await _productRepository.DeleteAsync(id);
     }
 
+    /// <summary>
+    /// Change le prix d'un produit avec validation métier.
+    /// </summary>
     public async Task<ProductDTO> ChangePriceAsync(Guid id, ChangePriceRequest request)
     {
         var product = await _productRepository.GetByIdAsync(id);

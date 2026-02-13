@@ -6,17 +6,26 @@ using AdvancedDevTP.Domain.Repositories;
 
 namespace AdvancedDevTP.Application.Interfaces;
 
+/// <summary>
+/// Implémentation du service métier pour la gestion des commandes clients.
+/// </summary>
 public class OrderService : IOrderService
 {
     private readonly IOrderRepositoryAsync _orderRepository;
     private readonly IProductRepositoryAsync _productRepository;
 
+    /// <summary>
+    /// Initialise une nouvelle instance du service OrderService.
+    /// </summary>
     public OrderService(IOrderRepositoryAsync orderRepository, IProductRepositoryAsync productRepository)
     {
         _orderRepository = orderRepository;
         _productRepository = productRepository;
     }
 
+    /// <summary>
+    /// Récupère une commande par son identifiant.
+    /// </summary>
     public async Task<OrderDTO> GetByIdAsync(Guid id)
     {
         var order = await _orderRepository.GetByIdAsync(id);
@@ -25,12 +34,18 @@ public class OrderService : IOrderService
         return MapToDTO(order);
     }
 
+    /// <summary>
+    /// Récupère toutes les commandes.
+    /// </summary>
     public async Task<IEnumerable<OrderDTO>> GetAllAsync()
     {
         var orders = await _orderRepository.GetAllAsync();
         return orders.Select(MapToDTO);
     }
 
+    /// <summary>
+    /// Crée une nouvelle commande avec validation des produits et des stocks.
+    /// </summary>
     public async Task<OrderDTO> CreateAsync(CreateOrderRequest request)
     {
         var order = new Order(request.CustomerName);
@@ -50,6 +65,9 @@ public class OrderService : IOrderService
         return MapToDTO(order);
     }
 
+    /// <summary>
+    /// Supprime une commande par son identifiant.
+    /// </summary>
     public async Task DeleteAsync(Guid id)
     {
         if (!await _orderRepository.ExistsAsync(id))

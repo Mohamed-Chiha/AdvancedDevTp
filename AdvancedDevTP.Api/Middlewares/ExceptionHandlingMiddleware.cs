@@ -6,18 +6,26 @@ using AdvancedDevTP.Infrastructure.Exceptions;
 
 namespace AdvancedDevSample.API.Middlewares
 {
-    
-public class ExceptionHandlingMiddleware
-{
-    private readonly RequestDelegate _next;
-    private readonly ILogger<ExceptionHandlingMiddleware> _logger;
-    
-    public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
+    /// <summary>
+    /// Middleware pour la gestion centralisée des exceptions en couche API.
+    /// </summary>
+    public class ExceptionHandlingMiddleware
+    {
+        private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+        
+        /// <summary>
+        /// Initialise une nouvelle instance du middleware ExceptionHandlingMiddleware.
+        /// </summary>
+        public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
     {
         _next = next;
         _logger = logger;
     }
     
+    /// <summary>
+    /// Traite les exceptions levées durant le pipeline de requête.
+    /// </summary>
     public async Task InvokeAsync(HttpContext context)
     {
         try

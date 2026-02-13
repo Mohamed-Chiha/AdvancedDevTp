@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdvancedDevTP.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3bbc7c3cc9b7e126d46996d79adda6eb7196261c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1fee6a1a7d60b3e2fb03a052c98623e20db6d8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdvancedDevTP.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdvancedDevTP.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

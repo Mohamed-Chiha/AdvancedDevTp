@@ -1,6 +1,6 @@
 ﻿using AdvancedDevTP.Application.DTOs;
 using AdvancedDevTP.Application.Exceptions;
-using AdvancedDevTP.Application.Interfaces; // Namespace where ProductService is located
+using AdvancedDevTP.Application.Interfaces; 
 using AdvancedDevTP.Domain.Entities;
 using AdvancedDevTP.Domain.Repositories;
 using Moq;
@@ -9,6 +9,9 @@ using Xunit;
 
 namespace AdvancedDevTP.Tests.API.UnitTests;
 
+/// <summary>
+/// Tests unitaires pour le service ProductService avec mocks des dépôts.
+/// </summary>
 public class ProductServiceTests
 {
     private readonly Mock<IProductRepositoryAsync> _mockRepo;

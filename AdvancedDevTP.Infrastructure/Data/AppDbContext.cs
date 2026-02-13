@@ -3,15 +3,39 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdvancedDevTP.Infrastructure.Data;
 
+/// <summary>
+/// Contexte Entity Framework Core pour l'accès aux données de l'application.
+/// </summary>
 public class AppDbContext : DbContext
 {
+    /// <summary>
+    /// Ensemble des entités de produits.
+    /// </summary>
     public DbSet<ProductEntity> Products => Set<ProductEntity>();
+    
+    /// <summary>
+    /// Ensemble des entités de catégories.
+    /// </summary>
     public DbSet<CategoryEntity> Categories => Set<CategoryEntity>();
+    
+    /// <summary>
+    /// Ensemble des entités de commandes.
+    /// </summary>
     public DbSet<OrderEntity> Orders => Set<OrderEntity>();
+    
+    /// <summary>
+    /// Ensemble des entités d'articles de commandes.
+    /// </summary>
     public DbSet<OrderItemEntity> OrderItems => Set<OrderItemEntity>();
 
+    /// <summary>
+    /// Initialise une nouvelle instance du contexte AppDbContext.
+    /// </summary>
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
+    /// <summary>
+    /// Configure le modèle de données et les relations entre les entités.
+    /// </summary>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ProductEntity>(entity =>

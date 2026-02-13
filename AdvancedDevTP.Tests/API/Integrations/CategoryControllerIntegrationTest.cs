@@ -5,6 +5,9 @@ using FluentAssertions;
 
 namespace AdvancedDevTP.Tests.API.Integrations;
 
+/// <summary>
+/// Tests d'intégration pour le contrôleur CategoryController.
+/// </summary>
 public class CategoryControllerIntegrationTest : IClassFixture<CustomWebApplicationFactory>
 {
     private readonly HttpClient _client;

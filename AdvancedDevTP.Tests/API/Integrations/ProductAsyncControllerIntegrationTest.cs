@@ -5,6 +5,9 @@ using FluentAssertions;
 
 namespace AdvancedDevTP.Tests.API.Integrations;
 
+/// <summary>
+/// Tests d'intégration pour le contrôleur ProductController.
+/// </summary>
 public class ProductAsyncControllerIntegrationTest : IClassFixture<CustomWebApplicationFactory>
 {
     private readonly HttpClient _client;

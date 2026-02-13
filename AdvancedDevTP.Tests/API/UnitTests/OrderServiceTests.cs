@@ -8,6 +8,9 @@ using Moq;
 
 namespace AdvancedDevTP.Tests.API.UnitTests;
 
+/// <summary>
+/// Tests unitaires pour le service OrderService avec mocks des dépôts.
+/// </summary>
 public class OrderServiceTests
 {
     private readonly Mock<IOrderRepositoryAsync> _mockOrderRepo;
