@@ -1,0 +1,11 @@
+site_name: AdvancedDevTP Documentation
+theme:
+  name: material
+  language: fr
+
+nav:
+  - Accueil: index.md
+  - Architecture: architecture.md
+  - API Endpoints: api-endpoints.md
+  - Tests: tests.md
+  - CI/CD: ci-cd.md
